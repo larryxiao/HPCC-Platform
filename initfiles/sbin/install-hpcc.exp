@@ -21,7 +21,7 @@
 #
 # Flow:
 #
-# 1. Copay HPCC package and script to node.
+# 1. Copy HPCC package and script to node.
 # 2. call remote-install-engine.sh to install and configure HPCC.
 #
 

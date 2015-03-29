@@ -22,7 +22,7 @@
 # Flow:
 #
 # 1. SSH Keys Generated.
-# 2. Run install-hpcc.sh through cluster-script.py to perform HPCC install and
+# 2. Run install-hpcc.exp through cluster-script.py to perform HPCC install and
 #        configuration on remote hosts
 # 3. Return.
 #
