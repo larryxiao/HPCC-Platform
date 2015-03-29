@@ -5,6 +5,7 @@
  *      Author: walnut
  */
 
+#include <stdlib.h>
 #include <cstddef>
 #include <iostream>
 #include <string>
@@ -22,25 +23,9 @@ po::variables_map vm;
 
 unsigned short SERVER_PORT;
 
-//commands
-//deploy, undeploy, redeploy(undeploy and deploy), start, stop, restart(stop and start)
-
-//example
-//deploy_manager -c -host xxx.xxx.xxx.xxx –p port_number -command "deploy:pkg_name_with_full_path:optional_configuration_file_with_full_path "
-//deploy_manager -c -host xxx.xxx.xxx.xxx –p port_number -command "start:optional_hpcc_component_name"
-
-// [TODO] parsing cli commands using dautils
+// [maybe] parsing cli commands using dautils
 
 void usage() {
-    //printf("(server mode)\n");
-    //printf("deploy_manager -s -p portnumber (default 6000)\n");
-    //printf("\n(client mode)\n");
-    //printf("deploy_manager -c\n");
-    //printf("-host xxx.xxx.xxx.xxx -p port_number (default 6000)\n");
-    //printf("-command [deploy, undeploy, redeploy]\n");
-    //printf("-pkg pkg_name_with_full_path -conf optional_configuration_file_with_full_path");
-    //printf("-command [start, stop, restart]\n");
-    //printf("-component optional_hpcc_component_name\n");
     cout << desc << "\n";
 }
 
@@ -58,8 +43,25 @@ enum Commands
 static const char * CommandsStrings[] = {"deploy", "undeploy", "redeploy", "start", "stop", "restart"};
 
 int serverFunc(int command){
-
-
+    //"usage: install-cluster.sh [-h|--help] [-k|--newkey] [-n|--concurrent <number>] <Platform Package>"
+    if (command == deploy) {
+       system("install-cluster.sh");  // calls remote-install-engine.sh
+    }
+    if (command == undeploy) {
+        // [TODO] implement undeploy
+    }
+    if (command == redeploy) {
+        // [TODO] implement redeploy
+    }
+    if (command == start) {
+       system("cluster_script.py -f manager_script.sh start"); 
+    }
+    if (command == stop) {
+       system("cluster_script.py -f manager_script.sh stop"); 
+    }
+    if (command == restart) {
+       system("cluster_script.py -f manager_script.sh restart"); 
+    }
 }
 
 int server() {
