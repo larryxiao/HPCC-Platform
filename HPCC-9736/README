@@ -1,0 +1,16 @@
+A simple C/S prototype for deploy_manager.
+
+For convenience purpose
+    both server and client are in the same program.
+    C/S communication are limited
+
+Design considerations
+    try to use jsocket form jlib
+    can use mashal/unmarshal or other method to pass command
+
+Dependencies
+    boost program-options
+    jsocket
+
+Misc
+    export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/opt/HPCCSystems/lib;
