@@ -43,24 +43,38 @@ enum Commands
 static const char * CommandsStrings[] = {"deploy", "undeploy", "redeploy", "start", "stop", "restart"};
 
 int serverFunc(int command){
-    //"usage: install-cluster.sh [-h|--help] [-k|--newkey] [-n|--concurrent <number>] <Platform Package>"
+	int ret = 0;
+	// [TODO] serialize / deserialize
+	string packageFilePath = "..";
+	string component = "..";
+	std::ostringstream commandStream;
+    // install-manager.sh <deploy/redeploy/undeploy> <package file path>
     if (command == deploy) {
-       system("install-cluster.sh");  // calls remote-install-engine.sh
+       commandStream << "cluster_script.py -f install-manager.sh deploy " << packageFilePath;
+       ret = system(commandStream.str().c_str());
     }
     if (command == undeploy) {
-        // [TODO] implement undeploy
+    	commandStream << "cluster_script.py -f install-manager.sh undeploy " << packageFilePath;
+    	ret = system(commandStream.str().c_str());
     }
     if (command == redeploy) {
-        // [TODO] implement redeploy
+    	commandStream << "cluster_script.py -f install-manager.sh redeploy " << packageFilePath;
+    	ret = system(commandStream.str().c_str());
     }
     if (command == start) {
-       system("cluster_script.py -f manager_script.sh start"); 
+    	commandStream << "cluster_script.py -f runtime_manager.sh start";
+    	ret = system(commandStream.str().c_str());
     }
     if (command == stop) {
-       system("cluster_script.py -f manager_script.sh stop"); 
+    	commandStream << "cluster_script.py -f runtime_manager.sh stop";
+    	ret = system(commandStream.str().c_str());
     }
     if (command == restart) {
-       system("cluster_script.py -f manager_script.sh restart"); 
+    	commandStream << "cluster_script.py -f runtime_manager.sh restart";
+    	ret = system(commandStream.str().c_str());
+    }
+    if (ret != 0) {
+    	// [TODO] something went wrong, need to be handled
     }
 }
 
